@@ -1,0 +1,6 @@
+Esta GLC corresponde ao exemplo 2.4 do Livro do Sipser:
+
+EXP -> EXP + TER | TER
+TER -> TER * FAT | FAT
+FAT -> ( EXP ) | d
+

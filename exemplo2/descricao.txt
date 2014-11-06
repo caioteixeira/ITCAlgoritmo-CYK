@@ -1,0 +1,11 @@
+Esta gramatica reconhece a seguinte linguagem sobre o alfabeto {a,b}
+
+{ w | w comeca e termina com a mesma letra}
+
+GLC original:
+
+S -> aTa | bTb | & | a | b
+T -> aT | bT | &
+
+(& denota a cadeia vazia)
+

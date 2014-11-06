@@ -1,0 +1,20 @@
+10 5 16
+EXP TER FAT U V X Y Z A B
+d + * ( ) 
+EXP > EXP U
+EXP > TER V
+EXP > A X
+EXP > d
+TER > TER V
+TER > A X
+TER > d
+FAT > A X
+FAT > d
+U > Y TER
+V > Z FAT
+X > EXP B
+Y > +
+Z > *
+A > (
+B > )
+

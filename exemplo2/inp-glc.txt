@@ -1,0 +1,19 @@
+6 2 15
+S T U V A B
+a b
+S > A U
+S > B V
+S > A A
+S > B B
+S > a
+S > b 
+S > &
+T > A T
+T > B T
+T > a
+T > b
+U > T A
+V > T B
+A > a
+B > b
+

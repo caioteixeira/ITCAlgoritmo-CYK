@@ -1,0 +1,10 @@
+Esta gramatica reconhece a seguinte linguagem sobre o alfabeto {a,b}
+
+{ w | w contem a mesma quantidade de 'a's e de 'b's}
+
+GLC original:
+
+S -> aSb | bSa | SS | &
+
+(& denota a cadeia vazia)
+
