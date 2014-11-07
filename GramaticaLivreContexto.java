@@ -29,15 +29,16 @@ public class GramaticaLivreContexto {
 			s = Integer.parseInt(linha0[1]);
 			t = Integer.parseInt(linha0[2]);
 
-			// Instancia Arrays das variaveis e simbolos terminais
-			variaveis = new String[q];
-			simbolosTerminais = new String[s];
-
 			// Popula variaveis
-
-			// Popula simbolos terminais
+			variaveis = lerArq.readLine().split(" ");
 			
-
+			// Popula simbolos terminais
+			simbolosTerminais = lerArq.readLine().split(" ");			
+			
+			/*
+			 * regrasDeSubstituicao
+			 * TODO
+			 */
 
 			/*while (linha != null) { 
 				System.out.printf("%s\n", linha); 
