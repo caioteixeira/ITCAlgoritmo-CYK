@@ -59,6 +59,8 @@ public class GramaticaLivreContexto {
 					List<String> novaListaDeRegras = new ArrayList<String>();
 					novaListaDeRegras.add(matcher.group(3));
 					regrasDeSubstituicao.put(matcher.group(1), novaListaDeRegras);
+
+					//System.out.println(novaListaDeRegras);
 				}
 
 				linha = lerArq.readLine(); // lê da segunda até a última linha 
@@ -74,10 +76,84 @@ public class GramaticaLivreContexto {
 		for (Cadeia cadeia : cadeias) {
 			if(cadeia.toString().equals("&") && vazioComoRegra()) {
 				// Aceita
+
+				continue;
 			}
 
 			String[] caracteres = cadeia.getCaracteres();
 			int tamCadeia = caracteres.length;
+
+			//Tabela nxn, onde n = tamCadeia
+			HashMap<Chave, ArrayList<String>> tabela = new HashMap<Chave, ArrayList<String>>();
+			// for(int i = 0; i < tamCadeia; i++)
+			// {
+			// 	for(int j = 0; j <= i; j++)
+			// 		tabela.put(new Chave(i,j), new ArrayList<String>());
+			// }
+
+
+			//Preenche diagonal principal
+			for(int i = 1; i <= tamCadeia; i++)
+			{
+				//Percorre regras
+				for(String key : regrasDeSubstituicao.keySet())
+				{
+					if(regrasDeSubstituicao.get(key).contains(caracteres[i-1]))
+					{
+						ArrayList<String> lista = tabela.get(new Chave(i,i));
+						if(lista == null)
+							lista = new ArrayList<String>();
+						lista.add(key);
+					}
+				}
+			}
+
+			
+			for(int l = 2; l < tamCadeia - l + 1; l++)
+			{
+				for(int i = 1; i < tamCadeia - l + 1; i++ )
+				{
+					int j = i + l - 1;
+					for(int k = i; k <= j-1; k++)
+					{
+						//Cada regra A -> BC
+						for(String key : regrasDeSubstituicao.keySet())
+						{
+							for(String regra : regrasDeSubstituicao.get(key))
+							{
+								String[] variaveis = regra.split(" ");
+								if(variaveis.length == 2)
+								{	
+									String A = variaveis[0];
+									String B = variaveis[1];
+									//System.out.println(key + "->" + A + B);
+
+									ArrayList<String> tabelaIK = tabela.get(new Chave(i,k));
+									ArrayList<String> tabelaKmais1J = tabela.get(new Chave(k+1, j));
+									if(tabelaIK == null || tabelaKmais1J == null) continue;
+
+									//Se tabela(i,k) contem B e tabela(k+1, j) contem C, ponha A em tabela(i,j)
+									if(tabelaIK.contains(A) && tabelaKmais1J.contains(B))
+									{
+
+										ArrayList<String> tabelaIJ = tabela.get(new Chave(i,j);
+										if(tabelaIJ == null)
+											tabelaIJ == new ArrayList<String>();
+										tabelaIJ.add(A));
+									}
+										 
+								}
+							}
+						}
+
+
+						
+					}
+
+
+				}
+			}
+
 
 		}
 	}
@@ -89,4 +165,31 @@ public class GramaticaLivreContexto {
 		}
 		return false;
 	}
+}
+
+//Define um conjunto de chaves x e y
+class Chave
+{
+	private final int x;
+	private final int y;
+
+	Chave(int x, int y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+
+	public boolean equals(Object o)
+	{
+		if(! (o instanceof Chave)) return false;
+
+		Chave ch = (Chave) o;
+		return ch.x == this.x && ch.y == this.y;
+	}
+
+	public int hashCode()
+	{
+		return x*x+y*y; 
+	}
+
 }
