@@ -80,81 +80,80 @@ public class GramaticaLivreContexto {
 				continue;
 			}
 
-			String[] caracteres = cadeia.getCaracteres();
-			int tamCadeia = caracteres.length;
-
 			//Tabela nxn, onde n = tamCadeia
 			HashMap<Chave, ArrayList<String>> tabela = new HashMap<Chave, ArrayList<String>>();
-			// for(int i = 0; i < tamCadeia; i++)
-			// {
-			// 	for(int j = 0; j <= i; j++)
-			// 		tabela.put(new Chave(i,j), new ArrayList<String>());
-			// }
+
+			this.preencheTabela(tabela, cadeia);
+		}
+	}
 
 
-			//Preenche diagonal principal
-			for(int i = 1; i <= tamCadeia; i++)
+	private void preencheTabela(HashMap<Chave, ArrayList<String>> tabela, Cadeia cadeia)
+	{
+		String[] caracteres = cadeia.getCaracteres();
+		int tamCadeia = caracteres.length;
+
+		//Preenche diagonal principal
+		for(int i = 1; i <= tamCadeia; i++)
+		{
+			//Percorre regras
+			for(String key : regrasDeSubstituicao.keySet())
 			{
-				//Percorre regras
-				for(String key : regrasDeSubstituicao.keySet())
+				if(regrasDeSubstituicao.get(key).contains(caracteres[i-1]))
 				{
-					if(regrasDeSubstituicao.get(key).contains(caracteres[i-1]))
-					{
-						ArrayList<String> lista = tabela.get(new Chave(i,i));
-						if(lista == null)
-							lista = new ArrayList<String>();
-						lista.add(key);
-					}
+					ArrayList<String> lista = tabela.get(new Chave(i,i));
+					if(lista == null)
+						lista = new ArrayList<String>();
+					lista.add(key);
 				}
 			}
+		}
 
-			
-			for(int l = 2; l < tamCadeia - l + 1; l++)
+		this.processaRegrasABC(tabela, tamCadeia);
+		
+	}
+
+	private void processaRegrasABC(HashMap<Chave, ArrayList<String>> tabela, int tamCadeia)
+	{
+
+
+		for(int l = 2; l < tamCadeia - l + 1; l++) //l = cumprimento da subcadeia
+		{
+			for(int i = 1; i < tamCadeia - l + 1; i++ ) //i = posicao inicial da subcadeia
 			{
-				for(int i = 1; i < tamCadeia - l + 1; i++ )
+				int j = i + l - 1; //j = posicao final da subcadeia
+				for(int k = i; k <= j-1; k++) //k = posicao de divisao
 				{
-					int j = i + l - 1;
-					for(int k = i; k <= j-1; k++)
+					//Cada regra A -> BC
+					for(String key : regrasDeSubstituicao.keySet())
 					{
-						//Cada regra A -> BC
-						for(String key : regrasDeSubstituicao.keySet())
+						for(String regra : regrasDeSubstituicao.get(key))
 						{
-							for(String regra : regrasDeSubstituicao.get(key))
-							{
-								String[] variaveis = regra.split(" ");
-								if(variaveis.length == 2)
-								{	
-									String A = variaveis[0];
-									String B = variaveis[1];
-									//System.out.println(key + "->" + A + B);
+							String[] variaveis = regra.split(" ");
+							if(variaveis.length == 2)
+							{	
+								String A = variaveis[0];
+								String B = variaveis[1];
+								//System.out.println(key + "->" + A + B);
 
-									ArrayList<String> tabelaIK = tabela.get(new Chave(i,k));
-									ArrayList<String> tabelaKmais1J = tabela.get(new Chave(k+1, j));
-									if(tabelaIK == null || tabelaKmais1J == null) continue;
+								ArrayList<String> tabelaIK = tabela.get(new Chave(i,k));
+								ArrayList<String> tabelaKmais1J = tabela.get(new Chave(k+1, j));
+								if(tabelaIK == null || tabelaKmais1J == null) continue;
 
-									//Se tabela(i,k) contem B e tabela(k+1, j) contem C, ponha A em tabela(i,j)
-									if(tabelaIK.contains(A) && tabelaKmais1J.contains(B))
-									{
-
-										ArrayList<String> tabelaIJ = tabela.get(new Chave(i,j);
-										if(tabelaIJ == null)
-											tabelaIJ == new ArrayList<String>();
-										tabelaIJ.add(A));
-									}
-										 
+								//Se tabela(i,k) contem B e tabela(k+1, j) contem C, ponha A em tabela(i,j)
+								if(tabelaIK.contains(A) && tabelaKmais1J.contains(B))
+								{
+									ArrayList<String> tabelaIJ = tabela.get(new Chave(i,j));
+									if(tabelaIJ == null)
+										tabelaIJ = new ArrayList<String>();
+									tabelaIJ.add(A);
 								}
+									 
 							}
 						}
-
-
-						
-					}
-
-
+					}		
 				}
 			}
-
-
 		}
 	}
 
