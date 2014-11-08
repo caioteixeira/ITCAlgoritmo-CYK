@@ -1,0 +1,27 @@
+Exercício Programa: Implementação do algoritmo CYK para Gramáticas Livres do Contexto
+
+Introdução a teoria da computação - Marcelo Lauretto
+
+Caio Vinícius Marques Teixeira- 8516883
+João Pedro Nardari dos Santos - 8623865
+
+-------------------------------------------------------------------------------------
+
+1 - COMPILANDO
+
+Neste exercicio-programa utilizamos a linguagem Java, para executar a compilação digite na pasta raiz:
+
+javac glc.java
+
+2 - EXECUTANDO E PASSANDO ARGUMENTOS
+
+Para executar o programa passe os 2 argumentos seguintes: caminho para o arquivo com a especificação da gramática e o caminho para o arquivo com as cadeias a serem avaliadas.
+
+java glc <caminho_gramatica> <caminho_arquivo_cadeias>
+
+Exemplo::
+	java glc exemplo1\inp-glc.txt exemplo\inp-cadeias.txt
+
+3 - ARQUIVOS DE SAIDA (OUT)
+
+Os arquivos de saida (status e tabela) serão escritos na pasta raiz (no mesmo nível do algoritmo glc.java).
