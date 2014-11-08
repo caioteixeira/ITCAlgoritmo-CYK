@@ -5,5 +5,7 @@ public class glc {
 		
 		// caminho do arquivo para as cadeias a serem avaliadas 
 		Cadeia[] cadeias = Cadeia.getCadeias(args[1]);
+
+		gramatica.processaCadeias(cadeias);
 	}
 }

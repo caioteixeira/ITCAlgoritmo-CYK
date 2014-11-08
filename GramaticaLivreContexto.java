@@ -70,6 +70,17 @@ public class GramaticaLivreContexto {
 	}
 
 	public void processaCadeias(Cadeia[] cadeias) {
-		// TODO
+		// TODO - Criar dois arquivos um para aceitar outro para ir ja preenchendo tabela
+		for (Cadeia cadeia : cadeias) {
+			String[] caracteres = cadeia.getCaracteres();
+
+			int tamCadeia = caracteres.length;
+
+			for (String c : caracteres) {
+				//System.out.print(c);
+			}
+			//System.out.println("|");	
+		}
+
 	}
 }

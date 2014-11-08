@@ -4,10 +4,15 @@ import java.io.IOException;
 
 public class Cadeia {
 	
-	String[] caracteres;
+	// Estudar possibilidade de colocar como char
+	private String[] caracteres;
 
 	public Cadeia(String[] caracteres) {
 		this.caracteres = caracteres;
+	}
+
+	public String[] getCaracteres() {
+		return caracteres;
 	}
 
 	public static Cadeia[] getCadeias(String caminhoArquivoCadeias) {
