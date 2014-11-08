@@ -4,11 +4,21 @@ import java.io.IOException;
 
 public class Cadeia {
 	
+	// Tabela a ser preenchida pelo algoritmo
+	private String[][] tabela;
+
+	private String cadeia;
+
 	// Estudar possibilidade de colocar como char
 	private String[] caracteres;
 
-	public Cadeia(String[] caracteres) {
-		this.caracteres = caracteres;
+	public Cadeia(String cadeia) {
+		this.cadeia = cadeia;
+		this.caracteres = cadeia.split(" ");
+	}
+
+	public String toString() {
+		return cadeia;
 	}
 
 	public String[] getCaracteres() {
@@ -29,7 +39,7 @@ public class Cadeia {
 			// Percorre cada linha seguinte populando array de cadeias
 			String linha = lerArq.readLine();
 			for (int i = 0; i<numeroCadeias; i++) {
-				cadeias[i] = new Cadeia(linha.split(" "));
+				cadeias[i] = new Cadeia(linha);
 				linha = lerArq.readLine();
 			}
 
