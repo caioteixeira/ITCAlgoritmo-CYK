@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+// Map
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -20,6 +21,7 @@ public class GramaticaLivreContexto {
 	String[] simbolosTerminais;
 
 	Map<String,List<String>> regrasDeSubstituicao = new HashMap<String,List<String>>();
+	
 	public GramaticaLivreContexto(String caminhoArquivo) {
 		carregaEspecificacao(caminhoArquivo);
 	}
@@ -42,7 +44,7 @@ public class GramaticaLivreContexto {
 			
 			// Carregando regras de substituicao
 			String linha = lerArq.readLine();
-			while (linha != null) { 
+			while (linha != null) {
 				
 				// Procura com regex padrao do arquivo
 				Pattern pattern = Pattern.compile("(.*)( > )(.*)");
@@ -67,4 +69,7 @@ public class GramaticaLivreContexto {
 		}
 	}
 
+	public void processaCadeias(Cadeia[] cadeias) {
+		// TODO
+	}
 }

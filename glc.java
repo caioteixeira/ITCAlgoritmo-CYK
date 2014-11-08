@@ -4,6 +4,6 @@ public class glc {
 		GramaticaLivreContexto gramatica = new GramaticaLivreContexto(args[0]);
 		
 		// caminho do arquivo para as cadeias a serem avaliadas 
-		Cadeias cadeias = new Cadeias(args[1]);
+		Cadeia[] cadeias = Cadeia.getCadeias(args[1]);
 	}
 }
