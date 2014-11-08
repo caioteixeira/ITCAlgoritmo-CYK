@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
+
+// Regex
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class GramaticaLivreContexto {
 	int q; // numVariaveis
@@ -35,15 +40,27 @@ public class GramaticaLivreContexto {
 			// Popula simbolos terminais
 			simbolosTerminais = lerArq.readLine().split(" ");			
 			
-			/*
-			 * regrasDeSubstituicao
-			 * TODO
-			 */
+			// Carregando regras de substituicao
+			String linha = lerArq.readLine();
+			while (linha != null) { 
+				
+				// Procura com regex padrao do arquivo
+				Pattern pattern = Pattern.compile("(.*)( > )(.*)");
+				Matcher matcher = pattern.matcher(linha);
+				matcher.matches();
+				
+				// Verifica se ja possuia uma regra ou mais para aquela variavel
+				List<String> regras = regrasDeSubstituicao.get(matcher.group(1));
+				if (regras != null) { // se ja possui apenas adiciona
+					regras.add(matcher.group(3));
+				} else { // se nao estava na lista cria nova lista
+					List<String> novaListaDeRegras = new ArrayList<String>();
+					novaListaDeRegras.add(matcher.group(3));
+					regrasDeSubstituicao.put(matcher.group(1), novaListaDeRegras);
+				}
 
-			/*while (linha != null) { 
-				System.out.printf("%s\n", linha); 
 				linha = lerArq.readLine(); // lê da segunda até a última linha 
-			}*/
+			}
 			arq.close(); 
 		} catch (IOException e) { 
 			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage()); 
