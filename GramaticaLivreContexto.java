@@ -25,7 +25,6 @@ public class GramaticaLivreContexto {
 
 	String variavelInicial;
 
-
 	Map<String,List<String>> regrasDeSubstituicao = new HashMap<String,List<String>>();
 	
 	public GramaticaLivreContexto(String caminhoArquivo) {
@@ -132,7 +131,9 @@ public class GramaticaLivreContexto {
 				}
 
 				//Foi aceita?
+				//Posicao 1,N da tabela
 				ArrayList umN = tabela.get(new Chave(1, tamCadeia));
+				//Se 1,N tiver variavel inicial, aceite
 				if(umN != null)
 				{
 					if(umN.contains(variavelInicial))
@@ -141,6 +142,7 @@ public class GramaticaLivreContexto {
 						continue;
 					}
 				}
+				//Se nao, rejeite
 				status.print("0 ");	
 
 			}
@@ -187,7 +189,7 @@ public class GramaticaLivreContexto {
 	//Processa e preenche a tabela para regras A->BC
 	private void processaRegrasABC(HashMap<Chave, ArrayList<String>> tabela, int tamCadeia)
 	{
-		for(int l = 2; l <= tamCadeia; l++) //l = cumprimento da subcadeia
+		for(int l = 2; l <= tamCadeia; l++) //l = comprimento da subcadeia
 		{
 			for(int i = 1; i <= tamCadeia - l + 1; i++ ) //i = posicao inicial da subcadeia
 			{
