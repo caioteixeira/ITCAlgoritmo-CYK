@@ -20,8 +20,8 @@ Para executar o programa passe os 2 argumentos seguintes: caminho para o arquivo
 java glc <caminho_gramatica> <caminho_arquivo_cadeias>
 
 Exemplo::
-	java glc exemplo1\inp-glc.txt exemplo\inp-cadeias.txt
+	java glc exemplo1\inp-glc.txt exemplo1\inp-cadeias.txt
 
 3 - ARQUIVOS DE SAIDA (OUT)
 
-Os arquivos de saida (status e tabela) serão escritos na pasta raiz (no mesmo nível do algoritmo glc.java).
+Os arquivos de saida (out-status.txt e out-tabela.txt) serão escritos e inseridos na pasta raiz (no mesmo nível do algoritmo glc.java).
