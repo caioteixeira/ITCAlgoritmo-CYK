@@ -23,6 +23,9 @@ public class GramaticaLivreContexto {
 	String[] variaveis;
 	String[] simbolosTerminais;
 
+	String variavelInicial;
+
+
 	Map<String,List<String>> regrasDeSubstituicao = new HashMap<String,List<String>>();
 	
 	public GramaticaLivreContexto(String caminhoArquivo) {
@@ -39,6 +42,7 @@ public class GramaticaLivreContexto {
 			s = Integer.parseInt(linha0[1]);
 			t = Integer.parseInt(linha0[2]);
 
+			
 			// Popula variaveis
 			variaveis = lerArq.readLine().split(" ");
 			
@@ -52,7 +56,10 @@ public class GramaticaLivreContexto {
 				Pattern pattern = Pattern.compile("(.*)( > )(.*)");
 				Matcher matcher = pattern.matcher(linha);
 				matcher.matches();
-				
+
+				if(i == 0)
+					variavelInicial = matcher.group(1);
+
 				// Verifica se ja possuia uma regra ou mais para aquela variavel
 				List<String> regras = regrasDeSubstituicao.get(matcher.group(1));
 				if (regras != null) { // se ja possui apenas adiciona
@@ -123,6 +130,19 @@ public class GramaticaLivreContexto {
 						outTabela.println();
 					}
 				}
+
+				//Foi aceita?
+				ArrayList umN = tabela.get(new Chave(1, tamCadeia));
+				if(umN != null)
+				{
+					if(umN.contains(variavelInicial))
+					{
+						status.print("1 ");	
+						continue;
+					}
+				}
+				status.print("0 ");	
+
 			}
 
 			//Finaliza arquivos
