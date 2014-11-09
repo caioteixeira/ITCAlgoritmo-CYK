@@ -47,7 +47,6 @@ public class GramaticaLivreContexto {
 			
 			// Carregando regras de substituicao
 			String linha = lerArq.readLine();
-
 			for (int i = 0; i<t; i++) {
 				// Procura com regex padrao do arquivo
 				Pattern pattern = Pattern.compile("(.*)( > )(.*)");
