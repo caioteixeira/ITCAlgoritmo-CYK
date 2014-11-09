@@ -83,7 +83,7 @@ public class GramaticaLivreContexto {
 
 	public void processaCadeias(Cadeia[] cadeias) {
 		try{
-			// TODO - Criar dois arquivos um para aceitar outro para ir ja preenchendo tabela
+			// Arquivos
 			PrintWriter status = new PrintWriter(new File("out-status.txt"));
 			PrintWriter outTabela = new PrintWriter(new File("out-tabela.txt"));
 
@@ -109,7 +109,6 @@ public class GramaticaLivreContexto {
 				//Impressao da tabela
 				for(int i = 1; i <= tamCadeia; i++)
 				{
-
 					for(int j = i; j <= tamCadeia; j++)
 					{
 						ArrayList<String> regras = tabela.get(new Chave(i,j));
@@ -163,8 +162,6 @@ public class GramaticaLivreContexto {
 		String[] caracteres = cadeia.getCaracteres();
 		int tamCadeia = caracteres.length;
 
-
-
 		//Preenche diagonal principal
 		for(int i = 1; i <= tamCadeia; i++)
 		{
@@ -183,7 +180,6 @@ public class GramaticaLivreContexto {
 		}
 
 		this.processaRegrasABC(tabela, tamCadeia);
-		
 	}
 
 	//Processa e preenche a tabela para regras A->BC
@@ -225,8 +221,7 @@ public class GramaticaLivreContexto {
 									if(!tabelaIJ.contains(A))
 										tabelaIJ.add(A);
 									tabela.put(new Chave(i,j), tabelaIJ);
-								}
-									 
+								}	 
 							}
 						}
 					}		
