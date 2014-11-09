@@ -1,6 +1,9 @@
+//I/O
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.File;
 
 // Map
 import java.util.HashMap;
@@ -72,18 +75,62 @@ public class GramaticaLivreContexto {
 	}
 
 	public void processaCadeias(Cadeia[] cadeias) {
-		// TODO - Criar dois arquivos um para aceitar outro para ir ja preenchendo tabela
-		for (Cadeia cadeia : cadeias) {
-			if(cadeia.toString().equals("&") && vazioComoRegra()) {
-				// Aceita
+		try{
+			// TODO - Criar dois arquivos um para aceitar outro para ir ja preenchendo tabela
+			PrintWriter status = new PrintWriter(new File("out-status.txt"));
+			PrintWriter outTabela = new PrintWriter(new File("out-tabela.txt"));
 
-				continue;
+			//Integer nCadeias = cadeias.length;
+			outTabela.println(cadeias.length);
+
+
+			for (Cadeia cadeia : cadeias) {
+				outTabela.println(cadeia);
+
+				if(cadeia.toString().equals("&") && vazioComoRegra()) {
+					//System.out.println("Vazio");
+					status.print("1 ");
+					continue;
+				}
+
+				int tamCadeia = cadeia.getCaracteres().length;
+
+				//Tabela nxn, onde n = tamCadeia
+				HashMap<Chave, ArrayList<String>> tabela = new HashMap<Chave, ArrayList<String>>();
+
+				this.preencheTabela(tabela, cadeia);
+
+				//Impressao da tabela
+				for(int i = 1; i <= tamCadeia; i++)
+				{
+					for(int j = i; j <= tamCadeia; j++)
+					{
+						ArrayList<String> regras = tabela.get(new Chave(i,j));
+						
+						outTabela.print(i + " ");
+						outTabela.print(j);
+
+						if(regras != null)
+						{
+							//System.out.println("Ok");
+							for(String regra : regras)
+							{
+								outTabela.print(" "+regra);
+							}
+						}
+
+						outTabela.println();
+					}
+				}
 			}
 
-			//Tabela nxn, onde n = tamCadeia
-			HashMap<Chave, ArrayList<String>> tabela = new HashMap<Chave, ArrayList<String>>();
-
-			this.preencheTabela(tabela, cadeia);
+			//Finaliza arquivos
+			status.close();
+			outTabela.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
 		}
 	}
 
@@ -92,6 +139,8 @@ public class GramaticaLivreContexto {
 	{
 		String[] caracteres = cadeia.getCaracteres();
 		int tamCadeia = caracteres.length;
+
+
 
 		//Preenche diagonal principal
 		for(int i = 1; i <= tamCadeia; i++)
@@ -105,6 +154,7 @@ public class GramaticaLivreContexto {
 					if(lista == null)
 						lista = new ArrayList<String>();
 					lista.add(key);
+					tabela.put(new Chave(i,i), lista);
 				}
 			}
 		}
@@ -113,15 +163,16 @@ public class GramaticaLivreContexto {
 		
 	}
 
+	//Processa e preenche a tabela para regras A->BC
 	private void processaRegrasABC(HashMap<Chave, ArrayList<String>> tabela, int tamCadeia)
 	{
-
-
 		for(int l = 2; l < tamCadeia - l + 1; l++) //l = cumprimento da subcadeia
 		{
 			for(int i = 1; i < tamCadeia - l + 1; i++ ) //i = posicao inicial da subcadeia
 			{
+
 				int j = i + l - 1; //j = posicao final da subcadeia
+
 				for(int k = i; k <= j-1; k++) //k = posicao de divisao
 				{
 					//Cada regra A -> BC
@@ -132,8 +183,9 @@ public class GramaticaLivreContexto {
 							String[] variaveis = regra.split(" ");
 							if(variaveis.length == 2)
 							{	
-								String A = variaveis[0];
-								String B = variaveis[1];
+								String A = key;
+								String B = variaveis[0];
+								String C = variaveis[1];
 								//System.out.println(key + "->" + A + B);
 
 								ArrayList<String> tabelaIK = tabela.get(new Chave(i,k));
@@ -141,12 +193,14 @@ public class GramaticaLivreContexto {
 								if(tabelaIK == null || tabelaKmais1J == null) continue;
 
 								//Se tabela(i,k) contem B e tabela(k+1, j) contem C, ponha A em tabela(i,j)
-								if(tabelaIK.contains(A) && tabelaKmais1J.contains(B))
+								if(tabelaIK.contains(B) && tabelaKmais1J.contains(C))
 								{
+									//System.out.println("Ok");
 									ArrayList<String> tabelaIJ = tabela.get(new Chave(i,j));
 									if(tabelaIJ == null)
 										tabelaIJ = new ArrayList<String>();
 									tabelaIJ.add(A);
+									tabela.put(new Chave(i,j), tabelaIJ);
 								}
 									 
 							}
@@ -178,6 +232,7 @@ class Chave
 		this.y = y;
 	}
 
+	@Override
 	public boolean equals(Object o)
 	{
 		if(! (o instanceof Chave)) return false;
@@ -186,9 +241,10 @@ class Chave
 		return ch.x == this.x && ch.y == this.y;
 	}
 
+	@Override
 	public int hashCode()
 	{
-		return x*x+y*y; 
+		return (42*x)+y; 
 	}
 
 }
