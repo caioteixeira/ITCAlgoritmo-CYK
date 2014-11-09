@@ -50,8 +50,9 @@ public class GramaticaLivreContexto {
 			while (linha != null) {
 				
 				// Procura com regex padrao do arquivo
-				Pattern pattern = Pattern.compile("(.*)( > )(.*)");
-				Matcher matcher = pattern.matcher(linha);
+				Pattern pattern1 = Pattern.compile("(.*)( > )(.*)");
+				Pattern pattern2 = Pattern.compile("([Ss])( > )(.*)");
+				Matcher matcher = pattern1.matcher(linha);
 				matcher.matches();
 				
 				// Verifica se ja possuia uma regra ou mais para aquela variavel
