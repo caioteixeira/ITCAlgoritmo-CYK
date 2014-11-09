@@ -63,11 +63,13 @@ public class GramaticaLivreContexto {
 					novaListaDeRegras.add(matcher.group(3));
 					regrasDeSubstituicao.put(matcher.group(1), novaListaDeRegras);
 
-					//System.out.println(novaListaDeRegras);
+					//System.out.println(matcher.group(1) + " " + novaListaDeRegras);
 				}
 
 				linha = lerArq.readLine(); // lê da segunda até a última linha 
 			}
+
+			//System.out.println(regrasDeSubstituicao);
 			arq.close(); 
 		} catch (IOException e) { 
 			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage()); 
@@ -88,7 +90,6 @@ public class GramaticaLivreContexto {
 				outTabela.println(cadeia);
 
 				if(cadeia.toString().equals("&") && vazioComoRegra()) {
-					//System.out.println("Vazio");
 					status.print("1 ");
 					continue;
 				}
@@ -166,9 +167,9 @@ public class GramaticaLivreContexto {
 	//Processa e preenche a tabela para regras A->BC
 	private void processaRegrasABC(HashMap<Chave, ArrayList<String>> tabela, int tamCadeia)
 	{
-		for(int l = 2; l < tamCadeia - l + 1; l++) //l = cumprimento da subcadeia
+		for(int l = 2; l <= tamCadeia; l++) //l = cumprimento da subcadeia
 		{
-			for(int i = 1; i < tamCadeia - l + 1; i++ ) //i = posicao inicial da subcadeia
+			for(int i = 1; i <= tamCadeia - l + 1; i++ ) //i = posicao inicial da subcadeia
 			{
 
 				int j = i + l - 1; //j = posicao final da subcadeia
@@ -199,7 +200,8 @@ public class GramaticaLivreContexto {
 									ArrayList<String> tabelaIJ = tabela.get(new Chave(i,j));
 									if(tabelaIJ == null)
 										tabelaIJ = new ArrayList<String>();
-									tabelaIJ.add(A);
+									if(!tabelaIJ.contains(A))
+										tabelaIJ.add(A);
 									tabela.put(new Chave(i,j), tabelaIJ);
 								}
 									 
