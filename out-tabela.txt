@@ -1,78 +1,198 @@
-6
+7
 &
-a
-1 1 A
-a b a a b b
-1 1 A
-1 2 S S0
-1 3 U
+1 1
+d
+1 1 TER FAT EXP
+d * ( d + d )
+1 1 TER FAT EXP
+1 2
+1 3
 1 4
 1 5
-1 6 S S0
-2 2 B
-2 3 S S0
-2 4 U
-2 5 S S0
-2 6 T
+1 6
+1 7 TER EXP
+2 2 Z
+2 3
+2 4
+2 5
+2 6
+2 7 V
 3 3 A
 3 4
 3 5
-3 6 S S0
-4 4 A
-4 5 S S0
-4 6 T
-5 5 B
-5 6
-6 6 B
-a b 
-1 1 A
-1 2 S S0
-2 2 B
-b b a b 
-1 1 B
+3 6
+3 7 TER FAT EXP
+4 4 TER FAT EXP
+4 5
+4 6 EXP
+4 7 X
+5 5 Y
+5 6 U
+5 7
+6 6 TER FAT EXP
+6 7 X
+7 7 B
+d * d + d
+1 1 TER FAT EXP
+1 2
+1 3 TER EXP
+1 4
+1 5 EXP
+2 2 Z
+2 3 V
+2 4
+2 5
+3 3 TER FAT EXP
+3 4
+3 5 EXP
+4 4 Y
+4 5 U
+5 5 TER FAT EXP
+d + d + d
+1 1 TER FAT EXP
+1 2
+1 3 EXP
+1 4
+1 5 EXP
+2 2 Y
+2 3 U
+2 4
+2 5
+3 3 TER FAT EXP
+3 4
+3 5 EXP
+4 4 Y
+4 5 U
+5 5 TER FAT EXP
+d + d d
+1 1 TER FAT EXP
+1 2
+1 3 EXP
+1 4
+2 2 Y
+2 3 U
+2 4
+3 3 TER FAT EXP
+3 4
+4 4 TER FAT EXP
+d * ( d + d * ( d + d ) * d )
+1 1 TER FAT EXP
 1 2
 1 3
 1 4
-2 2 B
-2 3 S S0
-2 4 T
-3 3 A
-3 4 S S0
-4 4 B
-b b a a b a a b
-1 1 B
-1 2
-1 3
-1 4 S S0
-1 5 T
-1 6 S S0
-1 7 U
-1 8 S S0
-2 2 B
-2 3 S S0
-2 4 U
-2 5 S S0
-2 6 U
+1 5
+1 6
+1 7
+1 8
+1 9
+1 10
+1 11
+1 12
+1 13
+1 14
+1 15 TER EXP
+2 2 Z
+2 3
+2 4
+2 5
+2 6
 2 7
 2 8
+2 9
+2 10
+2 11
+2 12
+2 13
+2 14
+2 15 V
 3 3 A
 3 4
 3 5
 3 6
 3 7
 3 8
-4 4 A
-4 5 S S0
-4 6 U
+3 9
+3 10
+3 11
+3 12
+3 13
+3 14
+3 15 TER FAT EXP
+4 4 TER FAT EXP
+4 5
+4 6 EXP
 4 7
 4 8
-5 5 B
-5 6 S S0
-5 7 U
-5 8 S S0
-6 6 A
+4 9
+4 10
+4 11
+4 12 EXP
+4 13
+4 14 EXP
+4 15 X
+5 5 Y
+5 6 U
+5 7
+5 8
+5 9
+5 10
+5 11
+5 12 U
+5 13
+5 14 U
+5 15
+6 6 TER FAT EXP
 6 7
 6 8
-7 7 A
-7 8 S S0
-8 8 B
+6 9
+6 10
+6 11
+6 12 TER EXP
+6 13
+6 14 TER EXP
+6 15 X
+7 7 Z
+7 8
+7 9
+7 10
+7 11
+7 12 V
+7 13
+7 14
+7 15
+8 8 A
+8 9
+8 10
+8 11
+8 12 TER FAT EXP
+8 13
+8 14 TER EXP
+8 15 X
+9 9 TER FAT EXP
+9 10
+9 11 EXP
+9 12 X
+9 13
+9 14
+9 15
+10 10 Y
+10 11 U
+10 12
+10 13
+10 14
+10 15
+11 11 TER FAT EXP
+11 12 X
+11 13
+11 14
+11 15
+12 12 B
+12 13
+12 14
+12 15
+13 13 Z
+13 14 V
+13 15
+14 14 TER FAT EXP
+14 15 X
+15 15 B
