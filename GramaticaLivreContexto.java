@@ -67,14 +67,10 @@ public class GramaticaLivreContexto {
 					List<String> novaListaDeRegras = new ArrayList<String>();
 					novaListaDeRegras.add(matcher.group(3));
 					regrasDeSubstituicao.put(matcher.group(1), novaListaDeRegras);
-
-					//System.out.println(matcher.group(1) + " " + novaListaDeRegras);
 				}
-
 				linha = lerArq.readLine(); // lê da segunda até a última linha 
 			}
 
-			//System.out.println(regrasDeSubstituicao);
 			arq.close(); 
 		} catch (IOException e) { 
 			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage()); 
@@ -118,7 +114,6 @@ public class GramaticaLivreContexto {
 
 						if(regras != null)
 						{
-							//System.out.println("Ok");
 							for(String regra : regras)
 							{
 								outTabela.print(" "+regra);
@@ -205,7 +200,6 @@ public class GramaticaLivreContexto {
 								String A = key;
 								String B = variaveis[0];
 								String C = variaveis[1];
-								//System.out.println(key + "->" + A + B);
 
 								ArrayList<String> tabelaIK = tabela.get(new Chave(i,k));
 								ArrayList<String> tabelaKmais1J = tabela.get(new Chave(k+1, j));
@@ -214,7 +208,6 @@ public class GramaticaLivreContexto {
 								//Se tabela(i,k) contem B e tabela(k+1, j) contem C, ponha A em tabela(i,j)
 								if(tabelaIK.contains(B) && tabelaKmais1J.contains(C))
 								{
-									//System.out.println("Ok");
 									ArrayList<String> tabelaIJ = tabela.get(new Chave(i,j));
 									if(tabelaIJ == null)
 										tabelaIJ = new ArrayList<String>();
