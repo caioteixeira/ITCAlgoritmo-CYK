@@ -89,8 +89,8 @@ public class GramaticaLivreContexto {
 			for (Cadeia cadeia : cadeias) {
 				outTabela.println(cadeia);
 
-				if(cadeia.toString().equals("&") && vazioComoRegra()) {
-					status.print("1 ");
+				if(cadeia.toString().equals("&")) {
+					status.print(vazioComoRegra()?"1 ":"0 ");
 					continue;
 				}
 
@@ -104,6 +104,7 @@ public class GramaticaLivreContexto {
 				//Impressao da tabela
 				for(int i = 1; i <= tamCadeia; i++)
 				{
+
 					for(int j = i; j <= tamCadeia; j++)
 					{
 						ArrayList<String> regras = tabela.get(new Chave(i,j));
